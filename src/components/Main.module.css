@@ -1,0 +1,86 @@
+.main {
+  position: relative;
+  padding: 30px 0 50px;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #ffde30;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #000;
+}
+.dark-main {
+  background-color: #000;
+  color: #fff;
+}
+.dark-main button {
+  background-color: #afcbe3;
+  color: #fff;
+}
+.mode-button {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+}
+.card {
+  margin-top: 12px;
+  padding: 30px 12px 12px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #fd7f2a;
+  background-image: linear-gradient(200deg, #e89d9f, #f28658 15%, #fd7f2a 35%);
+}
+.dark-card {
+  background-color: #afcbe3;
+  background-image: linear-gradient(
+    190deg,
+    #afcbe3,
+    #a3b2db 60%,
+    #d7bcd9 80%,
+    #e89d9f
+  );
+}
+.filter {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.list {
+  margin: 30px auto 0;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.item > span {
+  flex: 1;
+  text-align: left;
+}
+.item > button {
+  background-color: #ffde30;
+}
+.item > button.dark-button {
+  background-color: #000;
+}
+.input-box {
+  margin: 30px auto 0;
+  width: 250px;
+  display: flex;
+}
+.input-box > input[type='text'] {
+  flex: 1;
+}
+.input-box > button {
+  background-color: #ffde30;
+}
+.input-box > button.dark-button {
+  background-color: #000;
+}

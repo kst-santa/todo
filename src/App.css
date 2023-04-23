@@ -1,38 +1,23 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: 'LeagueGothic-Regular';
+  src: url('../public/fonts/LeagueGothic-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('../public/fonts/NanumGothic.otf') format('otf');
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: 'LeagueGothic-Regular', 'NanumGothic', sans-serif;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  font-size: 2rem;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  border: none;
+  padding: 5px 10px;
+  background-color: #fd7f2a;
+  font: inherit;
+  color: #000;
+  cursor: pointer;
 }
