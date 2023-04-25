@@ -15,7 +15,7 @@ export default function Item({ toDo, dispatch }) {
   };
 
   return (
-    <div className={styles.item} key={toDo.uuid}>
+    <div className={styles.item}>
       <input
         type="checkbox"
         checked={toDo.isCompleted}

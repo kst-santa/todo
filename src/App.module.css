@@ -4,6 +4,7 @@
   gap: 12px;
 }
 .filter > li {
+  font-size: 2rem;
   cursor: pointer;
 }
 .active-filter {

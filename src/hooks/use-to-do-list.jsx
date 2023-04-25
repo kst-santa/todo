@@ -8,25 +8,31 @@ export default function useToDoList() {
   const [toDoList, dispatch] = useReducer(toDoListReducer, []);
 
   useEffect(() => {
-    setIsLoading(true);
-    setError(undefined);
+    const storageToDoList = localStorage.getItem('toDoList');
 
-    fetch('data/to_do_list.json')
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({
-          type: 'fetch',
-          fetchList: data.map((item) => {
-            return { ...item, uuid: uuidv4() };
-          }),
-        });
-      })
-      .catch((e) => setError(e))
-      .finally(() => setIsLoading(false));
+    if (storageToDoList) {
+      dispatch({ type: 'fetch', fetchList: JSON.parse(storageToDoList) });
+    } else {
+      setIsLoading(true);
+      setError(undefined);
+
+      fetch('data/to_do_list.json')
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({
+            type: 'fetch',
+            fetchList: data.map((item) => {
+              return { ...item, uuid: uuidv4() };
+            }),
+          });
+        })
+        .catch((e) => setError(e))
+        .finally(() => setIsLoading(false));
+    }
   }, []);
 
   useEffect(() => {
-    dispatch({ type: 'fetch', fetchList: toDoList });
+    localStorage.setItem('toDoList', JSON.stringify(toDoList));
   }, [toDoList]);
 
   return [isLoading, error, toDoList, dispatch];

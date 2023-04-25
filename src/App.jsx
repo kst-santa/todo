@@ -73,7 +73,7 @@ export default function App() {
           ) : (
             <div className={styles.list}>
               {filterToDoList.map((toDo) => (
-                <Item toDo={toDo} dispatch={dispatch} />
+                <Item key={toDo.uuid} toDo={toDo} dispatch={dispatch} />
               ))}
             </div>
           )}
