@@ -1,19 +1,16 @@
 import './App.css';
 import { DarkModeContext, DarkModeProvider } from './context/DarkModeContext';
 import Main from './components/Main';
-import { useContext, useEffect, useMemo, useReducer, useState } from 'react';
-import toDoListReducer from './reducer/to-do-list-reducer';
+import { useContext, useMemo, useState } from 'react';
 import styles from './App.module.css';
-import { TiDeleteOutline } from 'react-icons/ti';
 import useToDoList from './hooks/use-to-do-list';
 import Item from './components/Item';
 
 export default function App() {
   const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
-  const [isLoading, error, fetchToDoList] = useToDoList();
-  const [toDoList, dispatch] = useReducer(toDoListReducer, fetchToDoList);
+  const [isLoading, error, toDoList, dispatch] = useToDoList();
   const [contents, setContents] = useState('');
-  const [filter, setFilter] = useState();
+  const [filter, setFilter] = useState(undefined);
 
   const filterToDoList = useMemo(() => {
     if (filter === 'active') {
@@ -27,23 +24,11 @@ export default function App() {
     return toDoList;
   }, [toDoList, filter]);
 
-  useEffect(() => {
-    dispatch({ type: 'fetch', fetchList: fetchToDoList });
-  }, [fetchToDoList]);
-
-  const handleUpdate = (uuid) => {
-    dispatch({ type: 'update', uuid });
-  };
-
   const handleAdd = () => {
     if (contents) {
       dispatch({ type: 'add', contents });
       setContents('');
     }
-  };
-
-  const handleDelete = (uuid) => {
-    dispatch({ type: 'delete', uuid });
   };
 
   const handleChange = (e) => {
@@ -64,7 +49,7 @@ export default function App() {
                   ? styles['active-filter']
                   : ''
               }
-              onClick={() => setFilter()}
+              onClick={() => setFilter(undefined)}
             >
               All
             </li>
@@ -88,18 +73,14 @@ export default function App() {
           ) : (
             <div className={styles.list}>
               {filterToDoList.map((toDo) => (
-                <Item
-                  toDo={toDo}
-                  handleUpdate={handleUpdate}
-                  handleDelete={handleDelete}
-                />
+                <Item toDo={toDo} dispatch={dispatch} />
               ))}
             </div>
           )}
           <div className={styles['input-box']}>
             <input
               type="text"
-              placeholder=" Add To Do"
+              placeholder=" Add to do"
               value={contents}
               onChange={handleChange}
             />

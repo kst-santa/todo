@@ -3,8 +3,16 @@ import styles from './Item.module.css';
 import { DarkModeContext } from '../context/DarkModeContext';
 import { TiDeleteOutline } from 'react-icons/ti';
 
-export default function Item({ toDo, handleUpdate, handleDelete }) {
+export default function Item({ toDo, dispatch }) {
   const { darkMode } = useContext(DarkModeContext);
+
+  const handleUpdate = (uuid) => {
+    dispatch({ type: 'update', uuid });
+  };
+
+  const handleDelete = (uuid) => {
+    dispatch({ type: 'delete', uuid });
+  };
 
   return (
     <div className={styles.item} key={toDo.uuid}>

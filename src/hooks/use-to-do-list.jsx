@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import toDoListReducer from '../reducer/to-do-list-reducer';
 
 export default function useToDoList() {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
-  const [toDoList, setToDoList] = useState([]);
+  const [error, setError] = useState(undefined);
+  const [toDoList, dispatch] = useReducer(toDoListReducer, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -13,15 +14,20 @@ export default function useToDoList() {
     fetch('data/to_do_list.json')
       .then((res) => res.json())
       .then((data) => {
-        setToDoList(
-          data.map((item) => {
+        dispatch({
+          type: 'fetch',
+          fetchList: data.map((item) => {
             return { ...item, uuid: uuidv4() };
-          })
-        );
+          }),
+        });
       })
       .catch((e) => setError(e))
       .finally(() => setIsLoading(false));
   }, []);
 
-  return [isLoading, error, toDoList];
+  useEffect(() => {
+    dispatch({ type: 'fetch', fetchList: toDoList });
+  }, [toDoList]);
+
+  return [isLoading, error, toDoList, dispatch];
 }
