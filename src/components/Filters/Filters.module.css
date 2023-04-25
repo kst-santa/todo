@@ -11,7 +11,7 @@
 .active-filter {
   border-bottom: 2px solid var(--color-yellow);
   transition-property: border-bottom;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: var(--transition-timing-function);
   transition-duration: 300ms;
 }
 .dark-filter.active-filter {
