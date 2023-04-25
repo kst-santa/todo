@@ -1,0 +1,18 @@
+[
+  {
+    "contents": "공부하기",
+    "isCompleted": false
+  },
+  {
+    "contents": "밥먹기",
+    "isCompleted": true
+  },
+  {
+    "contents": "리액트 공부",
+    "isCompleted": true
+  },
+  {
+    "contents": "강의 보기",
+    "isCompleted": false
+  }
+]
