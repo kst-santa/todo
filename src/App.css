@@ -7,6 +7,17 @@
   src: url('../public/fonts/NanumGothic.otf') format('otf');
 }
 
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-orange: #fd7f2a;
+  --color-yellow: #ffde30;
+  --color-blue: #afcbe3;
+  --color-dark-blue: #afcbe350;
+  --transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
 body {
   font-family: 'LeagueGothic-Regular', 'NanumGothic', sans-serif;
 }
@@ -16,8 +27,8 @@ h1 {
 button {
   border: none;
   padding: 5px 10px;
-  background-color: #fd7f2a;
+  background-color: var(--color-orange);
   font: inherit;
-  color: #000;
+  color: var(--color-black);
   cursor: pointer;
 }

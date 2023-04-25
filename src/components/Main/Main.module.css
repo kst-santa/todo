@@ -4,23 +4,23 @@
   width: 100vw;
   height: calc(var(--vh, 1vh) * 100);
   box-sizing: border-box;
-  background-color: #ffde30;
+  background-color: var(--color-yellow);
   display: flex;
   flex-direction: column;
   text-align: center;
-  color: #000;
+  color: var(--color-black);
 }
 .dark-main {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-black);
+  color: var(--color-white);
   transition-property: background-color color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: var(--transition-timing-function);
   transition-duration: 150ms;
 }
 .dark-main button {
-  background-color: #afcbe3;
-  color: #fff;
+  background-color: var(--color-blue);
+  color: var(--color-white);
   transition-property: background-color color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: var(--transition-timing-function);
   transition-duration: 150ms;
 }

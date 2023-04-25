@@ -4,11 +4,16 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background-color: #fd7f2a;
-  background-image: linear-gradient(200deg, #e89d9f, #f28658 15%, #fd7f2a 35%);
+  background-color: var(--color-orange);
+  background-image: linear-gradient(
+    200deg,
+    #e89d9f,
+    #f28658 15%,
+    var(--color-orange) 35%
+  );
 }
 .dark-card {
-  background-color: #afcbe350;
+  background-color: var(--color-dark-blue);
   background-image: linear-gradient(
     190deg,
     #afcbe150,

@@ -9,11 +9,11 @@
   cursor: pointer;
 }
 .active-filter {
-  border-bottom: 2px solid #ffde30;
+  border-bottom: 2px solid var(--color-yellow);
   transition-property: border-bottom;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
 }
 .dark-filter.active-filter {
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--color-black);
 }
