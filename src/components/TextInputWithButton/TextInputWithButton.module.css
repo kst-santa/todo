@@ -1,0 +1,28 @@
+.input-box {
+  margin: 30px auto 0;
+  width: 250px;
+  display: flex;
+}
+.input-box > input[type='text'] {
+  border: unset;
+  border-bottom: 1px dashed #ffde30;
+  flex: 1;
+  background-color: transparent;
+  outline: unset;
+}
+.input-box > input[type='text'].dark-text-input {
+  border-bottom: 1px dashed #000;
+}
+.input-box > input[type='text']::placeholder {
+  color: #ffde30;
+  font-style: italic;
+}
+.input-box > input[type='text'].dark-text-input::placeholder {
+  color: #000;
+}
+.input-box > button {
+  background-color: #ffde30;
+}
+.input-box > button.dark-button {
+  background-color: #000;
+}

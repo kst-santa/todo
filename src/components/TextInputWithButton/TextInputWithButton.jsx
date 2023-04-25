@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DarkModeContext } from '../context/DarkModeContext';
+import { DarkModeContext } from '../../context/DarkModeContext';
 import styles from './TextInputWithButton.module.css';
 
 export default function TextInputWithButton({
@@ -14,6 +14,7 @@ export default function TextInputWithButton({
     <div className={styles['input-box']}>
       <input
         type="text"
+        className={darkMode ? styles['dark-text-input'] : ''}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

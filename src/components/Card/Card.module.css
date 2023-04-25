@@ -8,12 +8,12 @@
   background-image: linear-gradient(200deg, #e89d9f, #f28658 15%, #fd7f2a 35%);
 }
 .dark-card {
-  background-color: #afcbe3;
+  background-color: #afcbe350;
   background-image: linear-gradient(
     190deg,
-    #afcbe3,
-    #a3b2db 60%,
-    #d7bcd9 80%,
-    #e89d9f
+    #afcbe150,
+    #a3b2db50 60%,
+    #d7bcd950 80%,
+    #e89da050
   );
 }

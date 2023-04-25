@@ -2,7 +2,7 @@
   position: relative;
   padding: 30px 0 50px;
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   box-sizing: border-box;
   background-color: #ffde30;
   display: flex;
@@ -13,8 +13,14 @@
 .dark-main {
   background-color: #000;
   color: #fff;
+  transition-property: background-color color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 .dark-main button {
   background-color: #afcbe3;
   color: #fff;
+  transition-property: background-color color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }

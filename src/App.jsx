@@ -1,40 +1,52 @@
 import './App.css';
 import { DarkModeProvider } from './context/DarkModeContext';
-import Main from './components/Main';
-import { useMemo, useState } from 'react';
+import Main from './components/Main/Main';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './App.module.css';
 import useToDoList from './hooks/use-to-do-list';
-import Item from './components/Item';
-import Footer from './components/Footer';
-import Card from './components/Card';
-import TextInputWithButton from './components/TextInputWithButton';
+import Item from './components/Item/Item';
+import Footer from './components/Footer/Footer';
+import Card from './components/Card/Card';
+import TextInputWithButton from './components/TextInputWithButton/TextInputWithButton';
+import Filters from './components/Filters/Filters';
+
+const FILTERS = [
+  { text: 'All', value: undefined },
+  { text: 'Active', value: 'active' },
+  { text: 'Completed', value: 'completed' },
+];
 
 export default function App() {
   const [isLoading, error, toDoList, dispatch] = useToDoList();
   const [contents, setContents] = useState('');
-  const [filter, setFilter] = useState(undefined);
+  const [currentFilter, setCurrentFilter] = useState(undefined);
 
   const filterToDoList = useMemo(() => {
-    if (filter === 'active') {
+    if (currentFilter === 'active') {
       return toDoList.filter((toDo) => !toDo.isCompleted);
     }
 
-    if (filter === 'completed') {
+    if (currentFilter === 'completed') {
       return toDoList.filter((toDo) => toDo.isCompleted);
     }
 
     return toDoList;
-  }, [toDoList, filter]);
+  }, [toDoList, currentFilter]);
 
-  const handleAdd = () => {
-    if (contents) {
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      const vh = window.innerHeight / 100;
+
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+  }, []);
+
+  const handleClickButton = () => {
+    if (contents.trim()) {
       dispatch({ type: 'add', contents });
-      setContents('');
     }
-  };
 
-  const handleChange = (e) => {
-    setContents(e.target.value);
+    setContents('');
   };
 
   return (
@@ -42,30 +54,13 @@ export default function App() {
       <Main>
         <h1>To Do</h1>
         <Card>
-          <ul className={styles.filter}>
-            <li
-              className={
-                filter !== 'active' && filter !== 'completed'
-                  ? styles['active-filter']
-                  : ''
-              }
-              onClick={() => setFilter(undefined)}
-            >
-              All
-            </li>
-            <li
-              className={filter === 'active' ? styles['active-filter'] : ''}
-              onClick={() => setFilter('active')}
-            >
-              Active
-            </li>
-            <li
-              className={filter === 'completed' ? styles['active-filter'] : ''}
-              onClick={() => setFilter('completed')}
-            >
-              Completed
-            </li>
-          </ul>
+          <Filters
+            filters={FILTERS}
+            current={currentFilter}
+            onClick={(value) => {
+              setCurrentFilter(value);
+            }}
+          />
           {isLoading || error ? (
             <p className={isLoading ? 'loading' : 'error'}>
               {isLoading ? 'Loading...' : `Error: ${error}`}{' '}
@@ -73,15 +68,26 @@ export default function App() {
           ) : (
             <div className={styles.list}>
               {filterToDoList.map((toDo) => (
-                <Item key={toDo.uuid} toDo={toDo} dispatch={dispatch} />
+                <Item
+                  key={toDo.uuid}
+                  item={toDo}
+                  onCheck={(uuid) => {
+                    dispatch({ type: 'update', uuid });
+                  }}
+                  onDelete={(uuid) => {
+                    dispatch({ type: 'delete', uuid });
+                  }}
+                />
               ))}
             </div>
           )}
           <TextInputWithButton
             placeholder="Add to do"
             value={contents}
-            onChange={handleChange}
-            onClick={handleAdd}
+            onChange={(e) => {
+              setContents(e.target.value);
+            }}
+            onClick={handleClickButton}
           />
         </Card>
         <Footer />
