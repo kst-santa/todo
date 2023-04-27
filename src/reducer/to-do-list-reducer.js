@@ -6,11 +6,20 @@ export default function toDoListReducer(toDoList, action) {
       return action.fetchList;
     }
     case 'update': {
+      const contents = action.contents;
+
+      if (contents === '') {
+        return toDoList.filter((toDo) => toDo.uuid !== action.uuid);
+      }
+
       return toDoList.map((toDo) => {
         if (toDo.uuid === action.uuid) {
           return {
             ...toDo,
-            isCompleted: !toDo.isCompleted,
+            isEdit: false,
+            contents: contents !== undefined ? contents : toDo.contents,
+            isCompleted:
+              contents === undefined ? !toDo.isCompleted : toDo.contents,
           };
         }
 
@@ -18,11 +27,16 @@ export default function toDoListReducer(toDoList, action) {
       });
     }
     case 'add': {
+      const { xPosition, yPosition } = action;
+
       return [
         ...toDoList,
         {
           uuid: uuidv4(),
-          contents: action.contents,
+          xPosition,
+          yPosition,
+          isEdit: true,
+          contents: '',
           isCompleted: false,
         },
       ];

@@ -16,7 +16,7 @@ export default function useToDoList() {
       setIsLoading(true);
       setError(undefined);
 
-      fetch('data/to_do_list.json')
+      fetch(`data/${window.outerWidth < 768 ? 'mobile_' : ''}to_do_list.json`)
         .then((res) => res.json())
         .then((data) => {
           dispatch({

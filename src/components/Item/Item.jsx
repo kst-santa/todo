@@ -1,29 +1,75 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import styles from './Item.module.css';
 import { DarkModeContext } from '../../context/DarkModeContext';
-import { TiDeleteOutline } from 'react-icons/ti';
-import Checkbox from '../Checkbox/Checkbox';
+import { MdDeleteOutline } from 'react-icons/md';
 
-export default function Item({ item, onCheck, onDelete }) {
-  const { darkMode } = useContext(DarkModeContext);
-  const { uuid, isCompleted, contents } = item;
+const ITEM_WIDTH = '200px';
+const MOBILE_ITEM_WIDTH = '150px';
+
+export default function Item({ item, onUpdate, onCheck, onDelete }) {
+  const { darkMode, isMobile } = useContext(DarkModeContext);
+  const { uuid, xPosition, yPosition, isEdit, contents, isCompleted } = item;
+  const checkboxId = `checkbox-${uuid}`;
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [width, setWidth] = useState('66px');
+  const inputRef = useRef(null);
+  const [input, setInput] = useState('');
+
+  useEffect(() => {
+    setWidth(isMobile ? MOBILE_ITEM_WIDTH : ITEM_WIDTH);
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (isEdit) {
+      const current = inputRef.current;
+
+      if (current) {
+        setTimeout(() => {
+          current.focus();
+          setIsDisabled(false);
+        });
+      }
+    } else {
+      setIsDisabled(false);
+    }
+  }, [isEdit, inputRef]);
 
   return (
-    <div className={`${styles.item} ${darkMode ? styles['dark-item'] : ''}`}>
-      <Checkbox
+    <>
+      <input
+        type="checkbox"
+        className={styles.checkbox}
+        id={checkboxId}
+        disabled={isDisabled}
         checked={isCompleted}
         onChange={() => onCheck(uuid)}
-        uuid={uuid}
       />
       <label
-        className={isCompleted ? styles.completed : ''}
-        htmlFor={`checkbox-${uuid}`}
+        className={`${styles.item} ${darkMode ? styles['dark-item'] : ''} ${
+          isCompleted ? styles.completed : ''
+        }`}
+        style={{
+          top: `${yPosition}px`,
+          left: `${xPosition}px`,
+          width,
+        }}
+        htmlFor={checkboxId}
       >
-        {contents}
+        {isEdit ? (
+          <input
+            type="text"
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onBlur={() => onUpdate(uuid, input)}
+          />
+        ) : (
+          <>{contents}</>
+        )}
+        <button onClick={() => onDelete(uuid)}>
+          <MdDeleteOutline />
+        </button>
       </label>
-      <button onClick={() => onDelete(uuid)}>
-        <TiDeleteOutline />
-      </button>
-    </div>
+    </>
   );
 }

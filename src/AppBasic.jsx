@@ -1,12 +1,13 @@
 import './App.css';
 import { DarkModeProvider } from './context/DarkModeContext';
 import Main from './components/Main/Main';
-import { useMemo, useState } from 'react';
-import styles from './App.module.css';
+import { useEffect, useMemo, useState } from 'react';
+import styles from './AppBasic.module.css';
 import useToDoList from './hooks/use-to-do-list';
-import Item from './components/Item/Item';
+import ItemBasic from './components/ItemBasic/ItemBasic';
 import Footer from './components/Footer/Footer';
 import Card from './components/Card/Card';
+import TextInputWithButton from './components/TextInputWithButton/TextInputWithButton';
 import Filters from './components/Filters/Filters';
 
 const FILTERS = [
@@ -17,8 +18,8 @@ const FILTERS = [
 
 export default function App() {
   const [isLoading, error, toDoList, dispatch] = useToDoList();
+  const [contents, setContents] = useState('');
   const [currentFilter, setCurrentFilter] = useState(undefined);
-  const [touchStartTimeStamp, setTouchStartTimeStamp] = useState(0);
 
   const filterToDoList = useMemo(() => {
     if (currentFilter === 'active') {
@@ -32,20 +33,24 @@ export default function App() {
     return toDoList;
   }, [toDoList, currentFilter]);
 
-  const handleDoubleClickList = (e) => {
-    dispatch({ type: 'add', xPosition: e.pageX, yPosition: e.pageY });
-  };
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      const vh = window.innerHeight / 100;
 
-  const handleTouchStartList = (e) => {
-    setTouchStartTimeStamp(e.timeStamp);
-  };
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
 
-  const handleTouchEndList = (e) => {
-    const { pageX, pageY } = e.changedTouches[0];
+    return () => {
+      window.removeEventListener('resize');
+    };
+  }, []);
 
-    if (e.timeStamp - touchStartTimeStamp > 499) {
-      dispatch({ type: 'add', xPosition: pageX, yPosition: pageY });
+  const handleClickButton = () => {
+    if (contents.trim()) {
+      dispatch({ type: 'add', contents });
     }
+
+    setContents('');
   };
 
   return (
@@ -65,19 +70,11 @@ export default function App() {
               {isLoading ? 'Loading...' : `Error: ${error}`}{' '}
             </p>
           ) : (
-            <div
-              className={styles.list}
-              onDoubleClick={handleDoubleClickList}
-              onTouchStart={handleTouchStartList}
-              onTouchEnd={handleTouchEndList}
-            >
+            <div className={styles.list}>
               {filterToDoList.map((toDo) => (
-                <Item
+                <ItemBasic
                   key={toDo.uuid}
                   item={toDo}
-                  onUpdate={(uuid, contents) => {
-                    dispatch({ type: 'update', uuid, contents });
-                  }}
                   onCheck={(uuid) => {
                     dispatch({ type: 'update', uuid });
                   }}
@@ -88,6 +85,14 @@ export default function App() {
               ))}
             </div>
           )}
+          <TextInputWithButton
+            placeholder="Add to do"
+            value={contents}
+            onChange={(e) => {
+              setContents(e.target.value);
+            }}
+            onClick={handleClickButton}
+          />
         </Card>
         <Footer />
       </Main>

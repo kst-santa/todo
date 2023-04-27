@@ -11,6 +11,8 @@
     #f28658 15%,
     var(--color-orange) 35%
   );
+  display: flex;
+  flex-direction: column;
 }
 .dark-card {
   background-color: var(--color-dark-blue);

@@ -1,3 +1,6 @@
+.footer > p {
+  margin-top: 12px;
+}
 .mode-button {
   position: absolute;
   bottom: 12px;

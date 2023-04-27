@@ -1,27 +1,27 @@
 [
   {
-    "xPosition": 400,
+    "xPosition": 100,
     "yPosition": 250,
     "isEdit": false,
     "contents": "Study",
     "isCompleted": false
   },
   {
-    "xPosition": 200,
+    "xPosition": 50,
     "yPosition": 300,
     "isEdit": false,
     "contents": "Eating",
     "isCompleted": true
   },
   {
-    "xPosition": 600,
+    "xPosition": 150,
     "yPosition": 400,
     "isEdit": false,
     "contents": "Learn react",
     "isCompleted": true
   },
   {
-    "xPosition": 820,
+    "xPosition": 160,
     "yPosition": 550,
     "isEdit": false,
     "contents": "View lectures",

@@ -24,6 +24,11 @@ body {
 h1 {
   font-size: 4rem;
 }
+input[type='text'] {
+  padding: 0;
+  font-size: 100%;
+  font-family: 'LeagueGothic-Regular', 'NanumGothic', sans-serif;
+}
 button {
   border: none;
   padding: 5px 10px;
