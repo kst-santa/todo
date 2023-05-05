@@ -41,6 +41,16 @@ export default function toDoListReducer(toDoList, action) {
         },
       ];
     }
+    case 'addBasic': {
+      return [
+        ...toDoList,
+        {
+          uuid: uuidv4(),
+          contents: action.contents,
+          isCompleted: false,
+        },
+      ];
+    }
     case 'delete': {
       return toDoList.filter((toDo) => toDo.uuid !== action.uuid);
     }

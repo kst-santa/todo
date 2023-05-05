@@ -2,25 +2,10 @@
   margin-top: 12px;
   padding: 30px 12px 12px;
   width: 100%;
+  min-height: 0;
   height: 100%;
-  box-sizing: border-box;
-  background-color: var(--color-orange);
-  background-image: linear-gradient(
-    200deg,
-    #e89d9f,
-    #f28658 15%,
-    var(--color-orange) 35%
-  );
+  background-color: var(--accent-color);
+  background-image: var(--linear-gradient);
   display: flex;
   flex-direction: column;
-}
-.dark-card {
-  background-color: var(--color-dark-blue);
-  background-image: linear-gradient(
-    190deg,
-    #afcbe150,
-    #a3b2db50 60%,
-    #d7bcd950 80%,
-    #e89da050
-  );
 }

@@ -1,14 +1,11 @@
 .item {
-  border-bottom: 1px solid var(--color-yellow);
+  border-bottom: 1px solid var(--main-color);
   padding: 5px 0;
   width: 250px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-}
-.item.dark-item {
-  border-bottom: 1px solid var(--color-black);
 }
 .item > label {
   flex: 1;
@@ -22,8 +19,9 @@
   padding: 5px;
   background-color: transparent;
   display: flex;
-  color: var(--color-yellow);
+  color: var(--main-color);
 }
-.item.dark-item > button {
-  color: var(--color-black);
+.item > button:hover {
+  transform: rotate(15deg) scale(1.2);
+  transition: 300ms;
 }

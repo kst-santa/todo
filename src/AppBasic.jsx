@@ -1,7 +1,7 @@
 import './App.css';
 import { DarkModeProvider } from './context/DarkModeContext';
 import Main from './components/Main/Main';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import styles from './AppBasic.module.css';
 import useToDoList from './hooks/use-to-do-list';
 import ItemBasic from './components/ItemBasic/ItemBasic';
@@ -11,9 +11,9 @@ import TextInputWithButton from './components/TextInputWithButton/TextInputWithB
 import Filters from './components/Filters/Filters';
 
 const FILTERS = [
-  { text: 'All', value: undefined },
-  { text: 'Active', value: 'active' },
-  { text: 'Completed', value: 'completed' },
+  { text: 'all', value: undefined },
+  { text: 'active', value: 'active' },
+  { text: 'completed', value: 'completed' },
 ];
 
 export default function App() {
@@ -33,21 +33,9 @@ export default function App() {
     return toDoList;
   }, [toDoList, currentFilter]);
 
-  useEffect(() => {
-    window.addEventListener('resize', () => {
-      const vh = window.innerHeight / 100;
-
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    });
-
-    return () => {
-      window.removeEventListener('resize');
-    };
-  }, []);
-
   const handleClickButton = () => {
     if (contents.trim()) {
-      dispatch({ type: 'add', contents });
+      dispatch({ type: 'addBasic', contents });
     }
 
     setContents('');

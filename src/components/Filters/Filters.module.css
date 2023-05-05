@@ -6,14 +6,14 @@
 .filter > li {
   line-height: 3rem;
   font-size: 2rem;
+  text-transform: capitalize;
   cursor: pointer;
 }
-.active-filter {
-  border-bottom: 2px solid var(--color-yellow);
+.active-filter::after {
+  content: '';
+  border: 1px solid var(--main-color);
+  display: block;
   transition-property: border-bottom;
   transition-timing-function: var(--transition-timing-function);
   transition-duration: 300ms;
-}
-.dark-filter.active-filter {
-  border-bottom: 2px solid var(--color-black);
 }
