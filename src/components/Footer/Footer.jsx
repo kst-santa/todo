@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import { DarkModeContext } from '../../context/DarkModeContext';
+import { useDarkMode } from '../../context/DarkModeContext';
 import styles from './Footer.module.css';
 
 export default function Footer() {
-  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <footer className={styles.footer}>

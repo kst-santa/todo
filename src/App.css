@@ -14,6 +14,17 @@
   --color-yellow: #ffde30;
   --color-blue: #afcbe3;
   --color-dark-blue: #afcbe350;
+  --main-color: var(--color-yellow);
+  --text-color: var(--color-black);
+  --accent-color: var(--color-orange);
+  --scrollbar-color: var(--color-yellow);
+  --mode-button-color: var(--color-orange);
+  --linear-gradient: linear-gradient(
+    200deg,
+    #e89d9f,
+    #f28658 15%,
+    var(--color-orange) 35%
+  );
   --transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   --box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
@@ -21,9 +32,23 @@
 * {
   box-sizing: border-box;
 }
+html.dark {
+  --main-color: var(--color-black);
+  --text-color: var(--color-white);
+  --accent-color: var(--color-dark-blue);
+  --scrollbar-color: var(--color-blue);
+  --mode-button-color: var(--color-blue);
+  --linear-gradient: linear-gradient(
+    190deg,
+    #afcbe150,
+    #a3b2db50 60%,
+    #d7bcd950 80%,
+    #e89da050
+  );
+}
 body {
   font-family: 'LeagueGothic-Regular', 'NanumGothic', sans-serif;
-  accent-color: var(--color-orange);
+  accent-color: var(--accent-color);
 }
 h1 {
   font-size: 4rem;
@@ -38,11 +63,12 @@ input[type='text'] {
 button {
   border: none;
   padding: 5px 10px;
-  background-color: var(--color-orange);
+  background-color: var(--accent-color);
   font: inherit;
-  color: var(--color-black);
+  color: var(--text-color);
   cursor: pointer;
 }
+
 ::-webkit-scrollbar {
   width: 0.5rem;
 }
@@ -50,8 +76,8 @@ button {
   background-color: var(--color-black);
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-yellow);
+  background-color: var(--scrollbar-color);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-yellow);
+  background-color: var(--scrollbar-color);
 }

@@ -1,13 +1,13 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './Item.module.css';
-import { DarkModeContext } from '../../context/DarkModeContext';
+import { useDarkMode } from '../../context/DarkModeContext';
 import { MdDeleteOutline } from 'react-icons/md';
 
 const ITEM_WIDTH = '200px';
 const MOBILE_ITEM_WIDTH = '150px';
 
 export default function Item({ item, onUpdate, onCheck, onDelete }) {
-  const { darkMode, isMobile } = useContext(DarkModeContext);
+  const { isMobile } = useDarkMode();
   const { uuid, xPosition, yPosition, isEdit, contents, isCompleted } = item;
   const checkboxId = `checkbox-${uuid}`;
   const [isDisabled, setIsDisabled] = useState(true);
@@ -45,9 +45,7 @@ export default function Item({ item, onUpdate, onCheck, onDelete }) {
         onChange={() => onCheck(uuid)}
       />
       <label
-        className={`${styles.item} ${darkMode ? styles['dark-item'] : ''} ${
-          isCompleted ? styles.completed : ''
-        }`}
+        className={`${styles.item} ${isCompleted ? styles.completed : ''}`}
         style={{
           top: `${yPosition}px`,
           left: `${xPosition}px`,

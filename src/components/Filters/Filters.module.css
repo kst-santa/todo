@@ -11,12 +11,9 @@
 }
 .active-filter::after {
   content: '';
-  border: 1px solid var(--color-yellow);
+  border: 1px solid var(--main-color);
   display: block;
   transition-property: border-bottom;
   transition-timing-function: var(--transition-timing-function);
   transition-duration: 300ms;
-}
-.dark-filter.active-filter::after {
-  border-color: var(--color-black);
 }

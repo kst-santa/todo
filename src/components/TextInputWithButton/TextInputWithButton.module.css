@@ -4,26 +4,17 @@
   display: flex;
 }
 .input-box > input[type='text'] {
-  border-bottom: 1px dashed var(--color-yellow);
+  border-bottom: 1px dashed var(--main-color);
   flex: 1;
   background-color: transparent;
 }
-.input-box > input[type='text'].dark-text-input {
-  border-bottom: 1px dashed var(--color-black);
-}
 .input-box > input[type='text']::placeholder {
-  color: var(--color-yellow);
+  color: var(--main-color);
   font-style: italic;
 }
-.input-box > input[type='text'].dark-text-input::placeholder {
-  color: var(--color-black);
-}
 .input-box > button {
-  background-color: var(--color-yellow);
+  background-color: var(--main-color);
 }
 .input-box > button:hover {
   filter: brightness(125%);
-}
-.input-box > button.dark-button {
-  background-color: var(--color-black);
 }

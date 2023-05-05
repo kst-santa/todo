@@ -5,22 +5,17 @@
   width: 100vw;
   min-height: 360px;
   height: calc(var(--vh, 1vh) * 100);
-  background-color: var(--color-yellow);
+  background-color: var(--main-color);
   display: flex;
   flex-direction: column;
   text-align: center;
-  color: var(--color-black);
-}
-.dark-main {
-  background-color: var(--color-black);
-  color: var(--color-white);
+  color: var(--text-color);
   transition-property: background-color, color;
   transition-timing-function: var(--transition-timing-function);
   transition-duration: 150ms;
 }
-.dark-main button {
-  background-color: var(--color-blue);
-  color: var(--color-white);
+.main button {
+  background-color: var(--mode-button-color);
   transition-property: background-color, color;
   transition-timing-function: var(--transition-timing-function);
   transition-duration: 150ms;
