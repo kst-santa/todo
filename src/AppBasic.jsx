@@ -11,9 +11,9 @@ import TextInputWithButton from './components/TextInputWithButton/TextInputWithB
 import Filters from './components/Filters/Filters';
 
 const FILTERS = [
-  { text: 'All', value: undefined },
-  { text: 'Active', value: 'active' },
-  { text: 'Completed', value: 'completed' },
+  { text: 'all', value: undefined },
+  { text: 'active', value: 'active' },
+  { text: 'completed', value: 'completed' },
 ];
 
 export default function App() {
@@ -47,7 +47,7 @@ export default function App() {
 
   const handleClickButton = () => {
     if (contents.trim()) {
-      dispatch({ type: 'add', contents });
+      dispatch({ type: 'addBasic', contents });
     }
 
     setContents('');

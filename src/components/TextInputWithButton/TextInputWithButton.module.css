@@ -4,11 +4,9 @@
   display: flex;
 }
 .input-box > input[type='text'] {
-  border: unset;
   border-bottom: 1px dashed var(--color-yellow);
   flex: 1;
   background-color: transparent;
-  outline: unset;
 }
 .input-box > input[type='text'].dark-text-input {
   border-bottom: 1px dashed var(--color-black);
@@ -22,6 +20,9 @@
 }
 .input-box > button {
   background-color: var(--color-yellow);
+}
+.input-box > button:hover {
+  filter: brightness(125%);
 }
 .input-box > button.dark-button {
   background-color: var(--color-black);

@@ -24,6 +24,10 @@
   display: flex;
   color: var(--color-yellow);
 }
+.item > button:hover {
+  transform: rotate(15deg) scale(1.2);
+  transition: 300ms;
+}
 .item.dark-item > button {
   color: var(--color-black);
 }
