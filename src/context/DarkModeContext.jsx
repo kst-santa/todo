@@ -7,12 +7,18 @@ export function DarkModeProvider({ children }) {
   const [isMobile, setIsMobile] = useState(window.outerWidth < 768);
   const toggleDarkMode = () => setDarkMode((mode) => !mode);
 
-  useEffect(() => {
-    window.addEventListener('resize', (e) => {
-      const vh = window.innerHeight / 100;
+  const setVh = (e) => {
+    const vh = window.innerHeight / 100;
 
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-      setIsMobile(e.target.outerWidth < 768);
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    setIsMobile((e ? e.target.outerWidth : window.outerWidth) < 768);
+  };
+
+  useEffect(() => {
+    setVh();
+
+    window.addEventListener('resize', (e) => {
+      setVh(e);
     });
 
     return () => {
