@@ -1,7 +1,7 @@
 import './App.css';
 import { DarkModeProvider } from './context/DarkModeContext';
 import Main from './components/Main/Main';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import styles from './AppBasic.module.css';
 import useToDoList from './hooks/use-to-do-list';
 import ItemBasic from './components/ItemBasic/ItemBasic';
@@ -32,18 +32,6 @@ export default function App() {
 
     return toDoList;
   }, [toDoList, currentFilter]);
-
-  useEffect(() => {
-    window.addEventListener('resize', () => {
-      const vh = window.innerHeight / 100;
-
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    });
-
-    return () => {
-      window.removeEventListener('resize');
-    };
-  }, []);
 
   const handleClickButton = () => {
     if (contents.trim()) {

@@ -17,13 +17,6 @@ export function DarkModeProvider({ children }) {
       return isDark;
     });
 
-  const setVh = (e) => {
-    const vh = window.innerHeight / 100;
-
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-    setIsMobile((e ? e.target.outerWidth : window.outerWidth) < 768);
-  };
-
   useEffect(() => {
     const isDark =
       localStorage.theme === 'dark' ||
@@ -33,9 +26,11 @@ export function DarkModeProvider({ children }) {
     setDarkMode(isDark);
     updateDarkMode(isDark);
     setVh();
+    setIsMobile(window.outerWidth < 768);
 
     window.addEventListener('resize', (e) => {
-      setVh(e);
+      setVh();
+      setIsMobile(e.target.outerWidth < 768);
     });
 
     return () => {
@@ -58,4 +53,10 @@ function updateDarkMode(darkMode) {
     document.documentElement.classList.remove('dark');
     localStorage.theme = 'light';
   }
+}
+
+function setVh() {
+  const vh = window.innerHeight / 100;
+
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
